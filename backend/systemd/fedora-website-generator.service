@@ -1,0 +1,32 @@
+[Unit]
+Description=Fedora AI Website Generator
+Documentation=https://github.com/fedora-ai/website-generator
+After=network.target redis.service
+Wants=redis.service
+
+[Service]
+Type=exec
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/fedora-website-generator
+Environment=PATH=/opt/fedora-website-generator/venv/bin
+EnvironmentFile=/opt/fedora-website-generator/.env
+ExecStart=/opt/fedora-website-generator/venv/bin/python backend/main.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=5
+
+# Security
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/fedora-website-generator/uploads /opt/fedora-website-generator/generated
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fedora-website-generator
+
+[Install]
+WantedBy=multi-user.target
