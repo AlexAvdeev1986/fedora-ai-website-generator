@@ -40,9 +40,13 @@
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
+sudo dnf install python3-pip python3-virtualenv
+pip install --upgrade pip
 
 ```bash
 # Сделайте скрипты исполняемыми
+cd configuration
+
 chmod +x install_dependencies.sh
 chmod +x setup_project.sh
 
@@ -50,6 +54,8 @@ chmod +x setup_project.sh
 ./install_dependencies.sh
 
 Шаг 2: Настройка проекта
+
+
 
 # Перейдите в директорию проекта
 cd /opt/fedora-website-generator
