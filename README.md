@@ -61,8 +61,6 @@ cp .env.example .env
 # Редактирование .env файла
 nano .env
 
-sudo cp ./setup_project.sh /opt/fedora-website-generator/
-
 
 # Перейдите в директорию проекта
 cd /opt/fedora-website-generator

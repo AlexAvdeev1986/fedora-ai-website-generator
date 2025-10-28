@@ -22,8 +22,8 @@ sudo systemctl start redis
 sudo dnf install -y nginx
 
 # Создание директории проекта
-sudo mkdir -p /opt/fedora-website-generator
-sudo chown $USER:$USER /opt/fedora-website-generator
+sudo mkdir -p /opt/fedora-ai-website-generator
+sudo chown $USER:$USER /opt/fedora-ai-website-generator
 
 echo "✅ Зависимости установлены успешно!"
-echo "📁 Проект будет расположен в: /opt/fedora-website-generator"
+echo "📁 Проект будет расположен в: /opt/fedora-ai-website-generator"

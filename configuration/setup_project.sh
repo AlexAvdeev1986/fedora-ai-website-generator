@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-PROJECT_DIR="/opt/fedora-website-generator"
+PROJECT_DIR="/opt/fedora-ai-website-generator"
 BACKEND_DIR="$PROJECT_DIR/backend"
 FRONTEND_DIR="$PROJECT_DIR/frontend"
 CURRENT_USER=${SUDO_USER:-$USER}
@@ -26,7 +26,7 @@ echo "📁 Создание структуры директорий..."
 mkdir -p "$BACKEND_DIR" "$FRONTEND_DIR" "$PROJECT_DIR"/{logs,uploads,generated,cache,static}
 
 # 2) Копирование из исходного репозитория (если существует)
-SOURCE_DIR="/home/alex886/Документы/GitHub/fedora-website-generator"
+SOURCE_DIR="/home/alex886/Документы/GitHub/fedora-ai-website-generator"
 if [ -d "$SOURCE_DIR" ]; then
     echo "📋 Копирование файлов из исходного репозитория..."
     cp -r "$SOURCE_DIR"/backend/* "$BACKEND_DIR"/ 2>/dev/null || echo "ℹ️ Нет файлов в backend для копирования"
@@ -90,7 +90,7 @@ EOF
   <body>
     <div id="root">
       <h1>Fedora AI Website Generator — frontend заглушка</h1>
-      <p>Если у вас есть реальный фронтенд — замените /opt/fedora-website-generator/frontend содержимым репозитория.</p>
+      <p>Если у вас есть реальный фронтенд — замените /opt/fedora-ai-website-generator/frontend содержимым репозитория.</p>
     </div>
     <script>
       console.log("Frontend stub");
@@ -114,10 +114,10 @@ EOF
 fi
 
 # backend/systemd unit: если нет — создаём минимальную
-if [ ! -f "$BACKEND_DIR/systemd/fedora-website-generator.service" ]; then
-  echo "[info] backend/systemd/fedora-website-generator.service не найден — создаю заглушку (можно отредактировать)"
+if [ ! -f "$BACKEND_DIR/systemd/fedora-ai-website-generator.service" ]; then
+  echo "[info] backend/systemd/fedora-ai-website-generator.service не найден — создаю заглушку (можно отредактировать)"
   mkdir -p "$BACKEND_DIR/systemd"
-  cat > "$BACKEND_DIR/systemd/fedora-website-generator.service" <<EOF
+  cat > "$BACKEND_DIR/systemd/fedora-ai-website-generator.service" <<EOF
 [Unit]
 Description=Fedora AI Website Generator
 After=network.target redis.service
@@ -182,13 +182,13 @@ fi
 echo "🔐 Проверьте и отредактируйте .env: nano $PROJECT_DIR/.env"
 
 # 7) Копирование systemd unit (требуется sudo)
-if [ -f "$BACKEND_DIR/systemd/fedora-website-generator.service" ]; then
+if [ -f "$BACKEND_DIR/systemd/fedora-ai-website-generator.service" ]; then
   echo "⚙️ Копирую systemd unit в /etc/systemd/system/ (потребуется sudo)"
-  sudo cp "$BACKEND_DIR/systemd/fedora-website-generator.service" /etc/systemd/system/ || {
+  sudo cp "$BACKEND_DIR/systemd/fedora-ai-website-generator.service" /etc/systemd/system/ || {
     echo "[warn] Не удалось скопировать systemd unit — проверьте права"
   }
   sudo systemctl daemon-reload || echo "[warn] systemctl daemon-reload вернул ошибку"
-  echo "[info] systemd unit установлен (проверьте и при необходимости редактируйте /etc/systemd/system/fedora-website-generator.service)"
+  echo "[info] systemd unit установлен (проверьте и при необходимости редактируйте /etc/systemd/system/fedora-ai-website-generator.service)"
 else
   echo "[info] systemd unit не найден в $BACKEND_DIR/systemd — пропущено"
 fi
@@ -205,4 +205,4 @@ echo " 3) Запустите бэкенд вручную для теста:"
 echo "    source $VENV_DIR/bin/activate"
 echo "    cd $BACKEND_DIR"
 echo "    uvicorn main:app --reload --host 0.0.0.0 --port 8000"
-echo " 4) Если хотите systemd: sudo systemctl enable --now fedora-website-generator"
+echo " 4) Если хотите systemd: sudo systemctl enable --now fedora-ai-website-generator"
