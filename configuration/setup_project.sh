@@ -11,10 +11,28 @@ VENV_DIR="$BACKEND_DIR/venv"
 
 echo "🔧 Настройка проекта Fedora AI Website Generator"
 echo "📁 Проект: $PROJECT_DIR"
-echo "👤 Запуск от пользователя: $CURRENT_USER"
+echo "👤 Пользователь: $CURRENT_USER"
+echo "🐍 Python: $PYTHON_BIN"
+
+# Проверка существования Python
+if ! command -v "$PYTHON_BIN" &> /dev/null; then
+    echo "❌ Python $PYTHON_BIN не найден!"
+    echo "Установите: sudo dnf install python3.11"
+    exit 1
+fi
 
 # 1) Создание структуры директорий
-mkdir -p "$BACKEND_DIR" "$FRONTEND_DIR" "$PROJECT_DIR/logs" "$PROJECT_DIR/uploads" "$PROJECT_DIR/generated" "$PROJECT_DIR/cache" "$PROJECT_DIR/static"
+echo "📁 Создание структуры директорий..."
+mkdir -p "$BACKEND_DIR" "$FRONTEND_DIR" "$PROJECT_DIR"/{logs,uploads,generated,cache,static}
+
+# 2) Копирование из исходного репозитория (если существует)
+SOURCE_DIR="/home/alex886/Документы/GitHub/fedora-website-generator"
+if [ -d "$SOURCE_DIR" ]; then
+    echo "📋 Копирование файлов из исходного репозитория..."
+    cp -r "$SOURCE_DIR"/backend/* "$BACKEND_DIR"/ 2>/dev/null || echo "ℹ️ Нет файлов в backend для копирования"
+    cp -r "$SOURCE_DIR"/frontend/* "$FRONTEND_DIR"/ 2>/dev/null || echo "ℹ️ Нет файлов в frontend для копирования"
+    cp -r "$SOURCE_DIR"/configuration/* "$PROJECT_DIR"/ 2>/dev/null || echo "ℹ️ Нет файлов в configuration для копирования"
+fi
 
 # 2) Проверка наличия файлов; если отсутствуют — создаём минимальные заглушки
 # backend/requirements.txt
