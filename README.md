@@ -45,7 +45,7 @@ pip install --upgrade pip
 
 ```bash
 # Сделайте скрипты исполняемыми
-cd configuration
+cd configuration 
 
 chmod +x install_dependencies.sh
 chmod +x setup_project.sh
@@ -55,6 +55,13 @@ chmod +x setup_project.sh
 
 Шаг 2: Настройка проекта
 
+# Копирование конфигурации
+cp .env.example .env
+
+# Редактирование .env файла
+nano .env
+
+sudo cp ./setup_project.sh /opt/fedora-website-generator/
 
 
 # Перейдите в директорию проекта
@@ -65,11 +72,6 @@ cd /opt/fedora-website-generator
 
 Шаг 3: Конфигурация переменных окружения
 
-# Копирование конфигурации
-cp .env.example .env
-
-# Редактирование .env файла
-nano .env
 
 # Укажите ваш OpenAI API ключ и другие настройки:
 OPENAI_API_KEY=sk-your-actual-key-here
