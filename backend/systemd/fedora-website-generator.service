@@ -8,10 +8,10 @@ Wants=redis.service
 Type=exec
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/fedora-website-generator
-Environment=PATH=/opt/fedora-website-generator/venv/bin
-EnvironmentFile=/opt/fedora-website-generator/.env
-ExecStart=/opt/fedora-website-generator/venv/bin/python backend/main.py
+WorkingDirectory=/opt/fedora-ai-website-generator
+Environment=PATH=/opt/fedora-ai-website-generator/venv/bin
+EnvironmentFile=/opt/fedora-ai-website-generator/.env
+ExecStart=/opt/fedora-ai-website-generator/venv/bin/python backend/main.py
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=5
@@ -21,12 +21,12 @@ NoNewPrivileges=yes
 PrivateTmp=yes
 ProtectSystem=strict
 ProtectHome=yes
-ReadWritePaths=/opt/fedora-website-generator/uploads /opt/fedora-website-generator/generated
+ReadWritePaths=/opt/fedora-ai-website-generator/uploads /opt/fedora-ai-website-generator/generated
 
 # Logging
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=fedora-website-generator
+SyslogIdentifier=fedora-ai-website-generator
 
 [Install]
 WantedBy=multi-user.target

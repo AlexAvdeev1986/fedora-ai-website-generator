@@ -8,7 +8,7 @@
 │   ├── image_processor.py
 │   ├── requirements.txt
 │   ├── systemd/
-│   │   └── fedora-website-generator.service
+│   │   └── fedora-ai-website-generator.service
 │   └── nginx/
 │       └── fedora-generator.conf
 ├── ⚛️ frontend/
@@ -63,7 +63,7 @@ nano .env
 
 
 # Перейдите в директорию проекта
-cd /opt/fedora-website-generator
+cd /opt/fedora-ai-website-generator
 
 # Запустите настройку проекта
 ./setup_project.sh
@@ -76,6 +76,8 @@ OPENAI_API_KEY=sk-your-actual-key-here
 
 Шаг 4: Запуск сервисов
 
+
+
 # Активация Python окружения
 source venv/bin/activate
 
@@ -84,8 +86,8 @@ sudo systemctl start redis
 sudo systemctl enable redis
 
 # Запуск бэкенда через systemd
-sudo systemctl start fedora-website-generator
-sudo systemctl enable fedora-website-generator
+sudo systemctl start fedora-ai-website-generator
+sudo systemctl enable fedora-ai-website-generator
 
 # Или ручной запуск для разработки
 cd backend
@@ -99,7 +101,7 @@ npm run dev
 Шаг 6: Проверка работы
 
 # Проверка статуса сервиса
-sudo systemctl status fedora-website-generator
+sudo systemctl status fedora-ai-website-generator
 
 # Проверка через браузер
 firefox http://localhost:8000
@@ -121,19 +123,19 @@ sudo systemctl reload nginx
 🎯 КОМАНДЫ УПРАВЛЕНИЯ
 
 # Запуск сервиса
-sudo systemctl start fedora-website-generator
+sudo systemctl start fedora-ai-website-generator
 
 # Остановка сервиса  
-sudo systemctl stop fedora-website-generator
+sudo systemctl stop fedora-ai-website-generator
 
 # Перезапуск сервиса
-sudo systemctl restart fedora-website-generator
+sudo systemctl restart fedora-ai-website-generator
 
 # Просмотр логов
-sudo journalctl -u fedora-website-generator -f
+sudo journalctl -u fedora-ai-website-generator -f
 
 # Проверка статуса
-sudo systemctl status fedora-website-generator
+sudo systemctl status fedora-ai-website-generator
 
 
 🔧 РЕШЕНИЕ ПРОБЛЕМ
